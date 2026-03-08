@@ -1,5 +1,8 @@
 <?php
 
+// insert, select, update, delete
+// INS, DSP, UPD, DEL
+
 namespace Controllers\Mantenimientos\Libros;
 
 use Controllers\PublicController;
