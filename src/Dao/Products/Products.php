@@ -43,12 +43,15 @@ class Products extends Table
                 $sqlstr .= ' DESC';
             }
         }
+        $itemsPerPage = $itemsPerPage > 0 ? $itemsPerPage : 10;
+        $page = $page >= 0 ? $page : 0;
         $numeroDeRegistros = self::obtenerUnRegistro($sqlstrCount, $params)['count'];
-        $pagesCount = ceil($numeroDeRegistros / $itemsPerPage);
+        $pagesCount = $numeroDeRegistros > 0 ? ceil($numeroDeRegistros / $itemsPerPage) : 1;
         if ($page > $pagesCount - 1) {
             $page = $pagesCount - 1;
         }
-        $sqlstr .= ' LIMIT '.$page * $itemsPerPage.', '.$itemsPerPage;
+        $offset = $page * $itemsPerPage;
+        $sqlstr .= ' LIMIT '.$offset.', '.$itemsPerPage;
 
         $registros = self::obtenerRegistros($sqlstr, $params);
 
